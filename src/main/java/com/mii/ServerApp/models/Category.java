@@ -1,10 +1,7 @@
 package com.mii.ServerApp.models;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 import java.util.List;
 
-// import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,6 +9,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,21 +20,18 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "tb_department")
-public class Department {
+@Table(name = "tb_category")
+public class Category {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "department_id")
+  @Column(name = "category_id")
   private Integer id;
 
-  @Column(name = "department_name", nullable = false)
-  private String name;
-
-  @Column(name = "budget", nullable = false)
-  private String budget;
-
-  @OneToMany(mappedBy = "department") 
+  @Column(name = "category_name", nullable = false)
+  private Integer category_name;
+  
+  @OneToMany(mappedBy="category")
   @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-  private List<Employee> employes;
+  private List<Product> products;
 }

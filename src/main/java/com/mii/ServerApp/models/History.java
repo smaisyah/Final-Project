@@ -13,9 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -25,39 +24,25 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "tb_loan")
-public class Loan {
+@Table(name = "tb_history")
+public class History {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "loan_id")
+  @Column(name = "history_id")
   private Integer id;
 
   @ManyToOne
-  @JoinColumn(name = "employee_id", nullable = false)
-  private Employee employee;
+  @JoinColumn(name = "loan_id", nullable = false)
+  private Loan loan;
 
-  @OneToMany(mappedBy="loan")
-  @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-  private List<History> Histories;
-
-  @OneToOne
-  @JoinColumn(name = "id", nullable = false)
-  private Product product;
-
-  @Column(name = "loan_date", nullable = false)
-  private Integer loan_date;
+  @Column(name = "nip", nullable = false)
+  private Integer nip;
 
   @Column(name = "return_date", length = 100, nullable = false)
-  private Integer return_date;
+  private String return_date;
 
-  @Column(name = "quantity_loan", length = 50, nullable = false)
-  private Integer quantity_loan;
-
-  @Column(name = "description", length = 50, nullable = false)
-  private String description;
-
-  @Column(name = "status", nullable = false)
+  @Column(name = "status", length = 100, nullable = false)
   private String status;
-  
+
 }

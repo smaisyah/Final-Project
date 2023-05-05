@@ -12,7 +12,12 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -47,15 +52,24 @@ public class Employee {
   @Column(name = "address", length = 150, nullable = false)
   private String address;
 
-  @OneToMany(mappedBy = "manager")
-  private List<Employee> subordinates;
+  @OneToOne(mappedBy = "employee", cascade = CascadeType.ALL)
+  @PrimaryKeyJoinColumn // untuk menentukan kolom kunci utama yang akan digunakan sebagai referensi antara dua tabel dalam relasi One-to-One atau Many-to-One.
+  private User user;
 
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "manager_id", referencedColumnName = "employee_id")
-  private Employee manager;
+  @OneToMany(mappedBy = "employee") 
+  @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+  private List<Loan> loans;
 
-  @ManyToOne(cascade = CascadeType.ALL)
-  @JoinColumn(name = "department_id", referencedColumnName = "department_id", nullable = false) // untuk menentukan kolom kunci utama yang akan digunakan sebagai referensi antara dua tabel dalam relasi One-to-One atau Many-to-One.
-  private Department department;
+  @ManyToOne(cascade={CascadeType.ALL})
+	@JoinColumn(name="manager_id")
+	private Employee manager;
+
+	@OneToMany(mappedBy="manager")
+  @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+	private List<Employee> subordinates;
+
+  @ManyToOne(cascade={CascadeType.ALL})
+	@JoinColumn(name="department_id", nullable = false)
+	private Department department;
 
 }
