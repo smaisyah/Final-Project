@@ -20,9 +20,9 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 @RequestMapping("/category")
 public class CategoryController {
-    private CategoryService categoryService;
+  private CategoryService categoryService;
 
-    @GetMapping
+  @GetMapping
   public List<Category> getAll() {
     return categoryService.getAll();
   }
