@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.mii.merodata.models.Department;
 
 @Repository
-public interface DepartentRepository extends JpaRepository<Department,Integer>{
+public interface DepartmentRepository extends JpaRepository<Department,Integer>{
     
 }
