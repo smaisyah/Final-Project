@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -49,8 +50,15 @@ public class Employee {
     @Column
     private String address;
 
-    @Column(name = "manager_id", nullable = false)
+    @Column(name = "manager_id", nullable = false, insertable = false, updatable = false)
     private Integer managerId;
+
+    @OneToMany(mappedBy = "manager")
+    private List<Employee> subordinates;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "manager_id", referencedColumnName = "id")
+    private Employee manager;
 
     @ManyToOne
     @JoinColumn(name = "department_id", nullable = false)
