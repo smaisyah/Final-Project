@@ -15,7 +15,6 @@ import lombok.AllArgsConstructor;
 @Service
 public class UserService {
     private UserRepository userRepository;
-    
 
     public List<User> getAll() {
         return userRepository.findAll();
@@ -28,15 +27,16 @@ public class UserService {
                         HttpStatus.NOT_FOUND,
                         "Data User not found!!!"));
     }
+
     public User create(User user) {
         return userRepository.save(user);
     }
 
     // public User update(Integer id, User user) {
-    //     getById(id); // method getById
-    //     user.setId(id);
-    //     user.setPassword(passwordEncoder.encode(user.getPassword()));
-    //     return userRepository.save(user);
+    // getById(id); // method getById
+    // user.setId(id);
+    // user.setPassword(passwordEncoder.encode(user.getPassword()));
+    // return userRepository.save(user);
     // }
 
     public User delete(Integer id) {
