@@ -1,10 +1,10 @@
-package com.mii.ServerApp.models.dto.request;
+// package com.mii.ServerApp.models.dto.request;
 
-import lombok.Data;
+// import lombok.Data;
 
-@Data
-public class LoginRequest {
+// @Data
+// public class LoginRequest {
 
-  private String username;
-  private String password;
-}
+//   private String username;
+//   private String password;
+// }

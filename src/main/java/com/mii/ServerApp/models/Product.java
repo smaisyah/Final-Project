@@ -43,10 +43,10 @@ public class Product {
   private User user;
 
   @Column(name = "product_name", nullable = false)
-  private Integer product_name;
+  private String name;
 
   @Column(name = "quantity", length = 100, nullable = false)
-  private Integer return_date;
+  private Integer quantity;
 
   @Column(name = "description", length = 20, nullable = false)
   private String description;

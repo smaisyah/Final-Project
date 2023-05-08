@@ -5,6 +5,7 @@ import com.mii.ServerApp.models.Loan;
 import com.mii.ServerApp.models.Product;
 import com.mii.ServerApp.models.dto.request.LoanRequest;
 import com.mii.ServerApp.repositories.LoanRepository;
+import com.mii.ServerApp.repositories.ProductRepository;
 
 import java.util.List;
 import lombok.AllArgsConstructor;
@@ -21,6 +22,7 @@ public class LoanService {
   private LoanRepository loanRepository;
   private EmployeeService employeeService;
   private ProductService productService;
+  private ProductRepository productRepository;
   // private ModelMapper modelMapper;
 
   public List<Loan> getAll() {
@@ -39,6 +41,15 @@ public class LoanService {
   }
 
   public Loan create(Loan loan) {
+    Product product = productService.getById(loan.getProduct().getId());
+    Integer currentQuantity = product.getQuantity();
+    if(currentQuantity < loan.getQuantity_loan()){
+      throw new ResponseStatusException(
+            HttpStatus.BAD_REQUEST,
+            "Cannot borrow more than available quantity"
+        );
+    }
+    product.setQuantity(currentQuantity - loan.getQuantity_loan());
     return loanRepository.save(loan);
   }
 
@@ -76,4 +87,5 @@ public class LoanService {
     loanRepository.delete(loan);
     return loan;
   }
+
 }

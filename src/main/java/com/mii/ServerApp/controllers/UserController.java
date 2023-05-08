@@ -2,7 +2,7 @@ package com.mii.ServerApp.controllers;
 
 import com.mii.ServerApp.models.Role;
 import com.mii.ServerApp.models.User;
-// import id.co.mii.serverapp.models.dto.requests.UserRequest;
+import com.mii.ServerApp.models.dto.request.UserRequest;
 import com.mii.ServerApp.services.UserService;
 import java.util.List;
 import lombok.AllArgsConstructor;
@@ -32,10 +32,10 @@ public class UserController {
     return userService.getById(id);
   }
 
-  // @PostMapping
-  // public User create(@RequestBody UserRequest userRequest) {
-  //   return userService.create(userRequest);
-  // }
+  @PostMapping
+  public User create(@RequestBody UserRequest userRequest) {
+    return userService.create(userRequest);
+  }
 
   @PutMapping("/{id}")
   public User update(@PathVariable Integer id, @RequestBody User user) {

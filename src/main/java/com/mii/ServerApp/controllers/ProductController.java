@@ -6,7 +6,7 @@ import com.mii.ServerApp.services.ProductService;
 import java.util.List;
 import lombok.AllArgsConstructor;
 
-import org.springframework.security.access.prepost.PreAuthorize;
+// import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,25 +23,25 @@ public class ProductController {
 
   private ProductService productService;
 
-  @PreAuthorize("hasAnyAuthority('READ_ADMIN', 'READ_USER')")
+  // @PreAuthorize("hasAnyAuthority('READ_ADMIN', 'READ_USER')")
   @GetMapping
   public List<Product> getAll() {
     return productService.getAll();
   }
 
-  @PreAuthorize("hasAnyAuthority('READ_ADMIN', 'READ_USER')")
+  // @PreAuthorize("hasAnyAuthority('READ_ADMIN', 'READ_USER')")
   @GetMapping("/{id}")
   public Product getById(@PathVariable Integer id) {
     return productService.getById(id);
   }
 
-  @PreAuthorize("hasAuthority('CREATE_ADMIN')")
+  // @PreAuthorize("hasAuthority('CREATE_ADMIN')")
   @PostMapping
   public Product create(@RequestBody Product product) {
     return productService.create(product);
   }
 
-  @PreAuthorize("hasAuthority('CREATE_ADMIN')")
+  // @PreAuthorize("hasAuthority('CREATE_ADMIN')")
   @PutMapping("/{id}")
   public Product update(
     @PathVariable Integer id,
@@ -50,7 +50,7 @@ public class ProductController {
     return productService.update(id, product);
   }
 
-  @PreAuthorize("hasAuthority('CREATE_ADMIN')")
+  // @PreAuthorize("hasAuthority('CREATE_ADMIN')")
   @DeleteMapping("/{id}")
   public Product delete(@PathVariable Integer id) {
     return productService.delete(id);

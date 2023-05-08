@@ -15,6 +15,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.AllArgsConstructor;
@@ -61,9 +63,11 @@ public class Employee {
 
   @ManyToOne
 	@JoinColumn(name="manager_id", nullable = false)
+  @JsonBackReference
 	private Employee manager;
 
 	@OneToMany(mappedBy="manager")
+  @JsonManagedReference
   @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
 	private List<Employee> subordinates;
 
