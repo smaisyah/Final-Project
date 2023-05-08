@@ -32,7 +32,7 @@ public class Department {
   private String name;
 
   @Column(name = "budget", nullable = false)
-  private String budget;
+  private Double budget;
 
   @OneToMany(mappedBy = "department") 
   @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)

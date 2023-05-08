@@ -5,7 +5,6 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -43,33 +42,37 @@ public class Employee {
   @Column(name = "email", length = 50, nullable = false)
   private String email;
 
-  @Column(name = "gender", length = 20, nullable = false)
-  private String gender;
+  @Column(nullable = false)
+  private Gender gender;
 
   @Column(name = "phone_number", nullable = false)
   private String phone;
   
   @Column(name = "address", length = 150, nullable = false)
-  private String address;
+  private String address; 
 
   @OneToOne(mappedBy = "employee", cascade = CascadeType.ALL)
-  @PrimaryKeyJoinColumn // untuk menentukan kolom kunci utama yang akan digunakan sebagai referensi antara dua tabel dalam relasi One-to-One atau Many-to-One.
+  @PrimaryKeyJoinColumn
   private User user;
 
   @OneToMany(mappedBy = "employee") 
   @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
   private List<Loan> loans;
 
-  @ManyToOne(cascade={CascadeType.ALL})
-	@JoinColumn(name="manager_id")
+  @ManyToOne
+	@JoinColumn(name="manager_id", nullable = false)
 	private Employee manager;
 
 	@OneToMany(mappedBy="manager")
   @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
 	private List<Employee> subordinates;
 
-  @ManyToOne(cascade={CascadeType.ALL})
+  @ManyToOne
 	@JoinColumn(name="department_id", nullable = false)
 	private Department department;
+
+  @OneToMany(mappedBy = "employee")
+  @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+  private List<Submition> submitions;
 
 }

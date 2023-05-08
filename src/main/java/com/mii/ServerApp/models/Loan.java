@@ -1,5 +1,6 @@
 package com.mii.ServerApp.models;
 
+import java.sql.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -46,10 +47,10 @@ public class Loan {
   private Product product;
 
   @Column(name = "loan_date", nullable = false)
-  private Integer loan_date;
+  private Date loan_date;
 
-  @Column(name = "return_date", length = 100, nullable = false)
-  private Integer return_date;
+  @Column(name = "return_date", nullable = false)
+  private Date return_date;
 
   @Column(name = "quantity_loan", length = 50, nullable = false)
   private Integer quantity_loan;

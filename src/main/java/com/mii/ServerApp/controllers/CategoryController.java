@@ -1,8 +1,7 @@
 package com.mii.ServerApp.controllers;
 
-import com.mii.ServerApp.models.Product;
-import com.mii.ServerApp.services.ProductService;
-
+import com.mii.ServerApp.models.Category;
+import com.mii.ServerApp.services.CategoryService;
 import java.util.List;
 import lombok.AllArgsConstructor;
 
@@ -18,41 +17,41 @@ import org.springframework.web.bind.annotation.RestController;
 
 @AllArgsConstructor
 @RestController
-@RequestMapping("/product")
-public class ProductController {
+@RequestMapping("/category")
+public class CategoryController {
 
-  private ProductService productService;
+  private CategoryService categoryService;
 
   @PreAuthorize("hasAnyAuthority('READ_ADMIN', 'READ_USER')")
   @GetMapping
-  public List<Product> getAll() {
-    return productService.getAll();
+  public List<Category> getAll() {
+    return categoryService.getAll();
   }
-
+  
   @PreAuthorize("hasAnyAuthority('READ_ADMIN', 'READ_USER')")
   @GetMapping("/{id}")
-  public Product getById(@PathVariable Integer id) {
-    return productService.getById(id);
+  public Category getById(@PathVariable Integer id) {
+    return categoryService.getById(id);
   }
 
   @PreAuthorize("hasAuthority('CREATE_ADMIN')")
   @PostMapping
-  public Product create(@RequestBody Product product) {
-    return productService.create(product);
+  public Category create(@RequestBody Category category) {
+    return categoryService.create(category);
   }
 
-  @PreAuthorize("hasAuthority('CREATE_ADMIN')")
+  @PreAuthorize("hasAuthority('UPDATE_ADMIN')")
   @PutMapping("/{id}")
-  public Product update(
+  public Category update(
     @PathVariable Integer id,
-    @RequestBody Product product
+    @RequestBody Category category
   ) {
-    return productService.update(id, product);
+    return categoryService.update(id, category);
   }
 
-  @PreAuthorize("hasAuthority('CREATE_ADMIN')")
+  @PreAuthorize("hasAuthority('DELETE_ADMIN')")
   @DeleteMapping("/{id}")
-  public Product delete(@PathVariable Integer id) {
-    return productService.delete(id);
+  public Category delete(@PathVariable Integer id) {
+    return categoryService.delete(id);
   }
 }

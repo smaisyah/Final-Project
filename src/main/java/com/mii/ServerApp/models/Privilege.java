@@ -28,6 +28,6 @@ public class Privilege {
   private String name;
 
   @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-  @ManyToMany(mappedBy = "privileges")
+  @ManyToMany(mappedBy = "privileges") 
   private List<Role> roles;
 }

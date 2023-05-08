@@ -29,7 +29,7 @@ public class Category {
   private Integer id;
 
   @Column(name = "category_name", nullable = false)
-  private Integer category_name;
+  private String name;
   
   @OneToMany(mappedBy="category")
   @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)

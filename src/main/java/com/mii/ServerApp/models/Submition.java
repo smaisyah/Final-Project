@@ -44,5 +44,9 @@ public class Submition {
 
   @Column(name = "status", nullable = false)
   private String status;
+
+  @ManyToOne
+  @JoinColumn(name = "employee_id", nullable = false)
+  private Employee employee;
   
 }

@@ -35,6 +35,27 @@ public class UserService {
       );
   }
 
+  // public User create(UserRequest userRequest) {
+  //   Employee employee = modelMapper.map(userRequest, Employee.class);
+  //   User user = modelMapper.map(userRequest, User.class);
+
+    // // Set role user secara otomatis pada saat create user
+    // Role userRole = roleService.getById(1); // .getByRoleName("user");
+    // user.setRoles(Collections.singletonList(userRole)); //  metode Collections.singletonList() untuk membuat sebuah daftar satu elemen yang berisi objek Role yang kita dapatkan sebelumnya.
+
+     // set password
+    //  user.setPassword(passwordEncoder.encode(userRequest.getPassword()));
+
+    // set Role
+    // List<Role> roles = new ArrayList<>();
+    // roles.add(roleService.getById(1));
+    // user.setRoles(roles);
+
+  //   employee.setUser(user);
+  //   user.setEmployee(employee);
+  //   return userRepository.save(user);
+  // }
+
   public User update(Integer id, User user) {
     getById(id); // method getById
     user.setId(id);
