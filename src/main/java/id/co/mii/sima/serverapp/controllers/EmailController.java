@@ -23,6 +23,11 @@ import id.co.mii.sima.serverapp.services.EmailService;
 public class EmailController {
 
   private EmailService emailService;
+
+  @PostMapping("/html")
+  public EmailRequest dynamic(@RequestBody EmailRequest emailRequest) {
+      return emailService.dynamic(emailRequest);
+  }
     
     @PostMapping("/sendingEmail")
     public EmailRespones sendEmail(@RequestBody EmailRequest request) throws MessagingException, TemplateException, IOException {

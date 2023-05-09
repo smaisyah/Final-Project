@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <title>Form Pengajuan</title>
+    <style>
+        body {
+            border: 3px solid black;
+            margin: 3px 198px 3px 198px;
+        }
+        .content-header {
+            margin: 5px 10px 3px 10px;
+            border-bottom: 3px solid black;
+            padding: 0px 0px 0px 0px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .content-body {
+            margin: 0px 10px 3px 10px;
+            border-top: 3px solid black;
+            padding: 5px 0px 10px 0px;
+            align-items: center; 
+        }
+
+        .content-body h1 {
+            text-align: center;
+            text-decoration: underline;
+        }
+
+        .label {
+            margin-right: 10px;
+        }
+        
+        table {
+            border: 1px solid;
+            align-items: center;
+            text-align: center;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid;
+            align-items: center;
+            text-align: center;
+        }
+
+        .content-footer {
+            margin: 0px 10px 3px 10px;
+            align-items: center;
+        }
+
+        .content-footer p {
+            text-align: center;
+        }
+
+        img {
+            display: inline; 
+            width: 20%; 
+            max-width: 0 auto; 
+            height: auto; 
+            margin: 10px;
+        }
+
+        .logo-container {
+        display: flex;
+        align-items: center;
+        margin: 0px;
+        padding: 3px;
+        }
+
+        .logo-container img {
+        max-width: 100px;
+        margin-right: 20px;
+        }
+
+        .text-container h1 {
+        font-size: 30px;
+        margin: 0px 10px 10px 65px;
+        text-align: center;
+        display: inline-block;
+        }
+
+        .text-container p {
+        font-size: 16px;
+        margin: 0px 120px 0px 0px;
+        text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <section class="header">
+        <div class="content-header">
+            <div class="logo-container">
+                <img src="https://www.metrodataacademy.id/logoMetrodata.png" alt="Logo PT Metrodata Electronics Tbk">
+                <div class="text-container">
+                  <h1>PT Metrodata Electronics Tbk</h1>
+                  <p>APL Tower lt.37 Suite 1-8 Jl. Letjen S. Parman Kav. 28 
+                    Kel. Tanjung Duren Selatan, Kec. Grogol Petamburan, Kota Administrasi Jakarta Barat</p>
+                </div>
+              </div>              
+        </div>
+    </section>
+    <!-- Body -->
+    <section class="content">
+        <div class="content-body">
+            <div>
+                <h1>Formulir Pengajuan Barang</h1><br>
+                <div>
+                    <p><span class="label">NIP </span>:<span th:text="${nip}"></span></p>
+                    <p><span class="label">Nama </span>:<span th:text="${name}"></span></p>
+                    <p><span class="label">Department </span>:<span th:text="${department}"></span></p>
+                </div>
+                <div>
+                    <br><p>Berikut ini merupakan data barang yang diajukan :</p>
+                </div>                  
+            </div>
+            <table>
+                <tr>
+                    <th>Submit id</th>
+                    <th>Employee id</th>
+                    <th>Product id</th>
+                    <th>Tanggal Pinjam</th>
+                    <th>Tanggal Dibalikan</th>
+                    <th>Status</th>
+                </tr>
+                <tr>
+                    <td>190</td>
+                    <td>2022</td>
+                    <td>9011</td>
+                    <td>20/01/2000</td>
+                    <td>21/01/2000</td>
+                    <td>Disetujui</td>
+                </tr>
+            </table>
+            <div>
+                <p>Silahkan hubungi admin yang bertugas jika
+                    mengalami kesalahan.
+                </p>  
+            </div>
+        </div>
+    </section>
+    <!-- Footer -->
+    <section class="footer">
+        <div class="content-footer">
+            <p>@2023-Metrodata Electronics</p>
+        </div>
+    </section>
+</body>
+</html>

@@ -7,6 +7,7 @@ import id.co.mii.sima.serverapp.models.dto.responses.EmailRespones;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.Map;
 import javax.mail.MessagingException;
 import javax.mail.internet.InternetAddress;
@@ -21,6 +22,8 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 import freemarker.template.Configuration;
 import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
+import org.thymeleaf.TemplateEngine;
+import org.thymeleaf.context.Context;
 
 @Service
 @AllArgsConstructor
@@ -31,6 +34,36 @@ public class EmailService {
 
   @Autowired
   private Configuration config;
+
+  private TemplateEngine templateEngine;
+
+    // html
+   public EmailRequest dynamic(EmailRequest emailRequest) {
+    try {
+        MimeMessage message = mailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(message, MimeMessageHelper.MULTIPART_MODE_MIXED_RELATED,
+                StandardCharsets.UTF_8.name());
+
+        Context ctx = new Context();
+        ctx.setVariables(emailRequest.getMap());
+
+        String html = templateEngine.process("submition", ctx);
+
+        helper.setTo(emailRequest.getTo());
+        helper.setText(html, true);
+        helper.setSubject(emailRequest.getSubject());
+
+        // FileSystemResource file = new FileSystemResource(new File(emailRequest.getAttach()));
+
+        // helper.addAttachment(file.getFilename(), file);
+
+        mailSender.send(message);
+        System.out.println("\nEmail success to send");
+    } catch (Exception e) {
+        throw new IllegalStateException("Email fail to send");
+    }
+    return emailRequest;
+}
 
     public EmailRespones sendEmail(EmailRequest request, Map<String, Object> model) throws MessagingException, TemplateException, IOException {
         EmailRespones response = new EmailRespones();
