@@ -39,7 +39,7 @@
    background: -webkit-linear-gradient(right, #7bf78c, #bd2d70);
    height: 2px;
    margin: -1.1rem auto 0 auto; /* untuk mengatur batas bagian luar*/
-   width: 300px;
+   width: 150px;
  }
  a {
  text-decoration: none; /* untuk menghilangkan underline pada elemen <a href=""> */
@@ -47,11 +47,6 @@
  label {
  font-family: "Raleway", sans-serif;
  font-size: 11pt; /* mengatur ukuran font */
- }
- .form {
- align-items: left; 
- display: flex;
- flex-direction: column;
  }
     #submit-btn { /*membuat style utama pada elemen dengan id tersebut*/
     background: -webkit-linear-gradient(right, #f77baa, #4d7adb);
@@ -80,26 +75,22 @@
     <!-- memberi judul form -->
         <div id="card-content">
             <div id="card-title">
-              <h2>REGISTRASI APLIKASI</h2>
+              <h2>Peminjaman Berhasil</h2>
               <div class="underline-title"></div> <!--menerapkan style pada elemen html yang memiliki class bernama “underline-title”-->
             </div>
-            <label><p>Dear <span th:text="${name}"></span>,</p></label>
+              <p>Dear <span th:text="${name}"></span>,</p>
 
-              <label><p>Kami informasikan untuk akun aplikasi manajemen aset sudah selesai di buatkan. 
-            <b>Username</b> dan <b>Password</b> tersebut diharapkan digunakan untuk keperluan pekerjaan.</p>
-                  <table>
+                    <p>Kami informasikan bahwa anda <b>berhasil</b> diterima untuk melakukan peminjaman dengan data sebagai berikut.</p>
+                    <table>
                       <tbody>
-                            <tr><td>Username   </td><td>=</td><td><span th:text="${username}"></span></td></tr>
-                            <tr><td>Password </td><td>=</td><td><span th:text="${password}"></span></td></tr>
-                            </tbody></table>
-                        <p>Kamu bisa langsung login dengan mengklik dibawah ini.</label>
-            <!-- Membuat form -->
-            <form  class="form"> 
-                    <input id="submit-btn" type="submit" name="submit" value="LOGIN" />
-            
-                    <label><p>Terima kasih.</p>
-                    <p>Tim ADD</p></label>
-            </form> 
+                      <tr><td>Tanggal Peminjaman   </td><td>=</td><td><span th:text="${loanDate}"></td></tr>
+                      <tr><td>Status </td><td>=</td><td><span th:text="${status}"></span></td></tr>
+                      <tr><td>Nama Produk </td><td>=</td><td><span th:text="${productName}"></span></td></tr>
+                      <tr><td>Quantity </td><td>=</td><td><span th:text="${quantity}"></span></span></td></tr>
+                      </tbody></table>
+                    <p>Anda dapat melihat detail secara lengkap pada <b>Aplikasi Manajemen Aset</b>.</p>
+                    <p>Terima kasih.</p>
+                    <p>Tim ADD.</p>
           </div>
            <!-- Bootstrap javascript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
