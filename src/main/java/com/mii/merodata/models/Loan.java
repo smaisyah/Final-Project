@@ -5,17 +5,12 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.MapsId;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -31,22 +26,26 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "submition")
-public class Submition {
+@Table(name = "loan")
+public class Loan {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "submition_date", nullable = false)
-    private Date submitionDate;
+    @Temporal(TemporalType.DATE)
+    @Column(name = "loan_date", nullable = false)
+    private Date loanDate;
+
+    @Temporal(TemporalType.DATE)
+    @Column(name = "return_date", nullable = false)
+    private Date returnDate;
 
     @Column(name = "description", nullable = false)
     private String description;
 
-    @OneToMany(mappedBy = "submition")
+    @OneToMany(mappedBy = "loan")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    private List<SubmitionDetail> detailSubmitions;
+    private List<LoanDetail> detailLoans;
 
     @ManyToOne
     @JoinColumn(name = "employee_id", nullable = false)
@@ -56,7 +55,7 @@ public class Submition {
     @JoinColumn(name = "status_id", nullable = false)
     private Status status;
 
-    @OneToMany(mappedBy = "submition")
+    @OneToMany(mappedBy = "loan")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private List<History> histories;
 }

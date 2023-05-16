@@ -27,7 +27,6 @@ public class ProductController {
         return productService.getAll();
     }
 
-    // @PreAuthorize("hasAnyAuthority('READ_ADMIN', 'READ_USER')")
     @GetMapping("/{id}")
     public Product getById(@PathVariable Integer id) {
         return productService.getById(id);

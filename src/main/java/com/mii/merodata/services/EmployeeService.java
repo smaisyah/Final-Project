@@ -8,6 +8,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.mii.merodata.models.Employee;
 import com.mii.merodata.repositories.EmployeeRepository;
+import com.mii.merodata.utils.GenerateId;
 
 import lombok.AllArgsConstructor;
 
@@ -15,6 +16,7 @@ import lombok.AllArgsConstructor;
 @Service
 public class EmployeeService {
     private EmployeeRepository employeeRepository;
+    private GenerateId generateId;
 
     public List<Employee> getAll() {
         return employeeRepository.findAll();
@@ -27,6 +29,14 @@ public class EmployeeService {
     }
 
     public Employee create(Employee employee) {
+        // String intial = "MCC";
+        // Integer maxDigit = 3;
+        // Integer currentId = 0;
+
+        // currentId++;
+        // String formatId = String.format("%s%0" + maxDigit + "d", intial, currentId);
+        
+        // employee.setNik(formatId);
         return employeeRepository.save(employee);
     }
 
