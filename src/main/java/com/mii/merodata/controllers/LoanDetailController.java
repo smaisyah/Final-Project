@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.mii.merodata.models.LoanDetail;
+import com.mii.merodata.services.EmailService;
 import com.mii.merodata.services.LoanDetailService;
 
 import lombok.AllArgsConstructor;
@@ -21,6 +22,7 @@ import lombok.AllArgsConstructor;
 @RequestMapping("/detloan")
 public class LoanDetailController {
     private LoanDetailService loanDetailService;
+    private EmailService emailService;
 
     @GetMapping
     public List<LoanDetail> getAll() {
@@ -47,5 +49,10 @@ public class LoanDetailController {
     @DeleteMapping("/{id}")
     public LoanDetail delete(@PathVariable Integer id) {
         return loanDetailService.delete(id);
+    }
+
+    @PostMapping("/loanEmail")
+    public void createFinance(@RequestBody LoanDetail loanDetail){
+         emailService.sendEmailLoan(loanDetail);
     }
 }

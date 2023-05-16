@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -25,6 +26,7 @@ public class UserService {
     private RoleService roleService;
     private EmployeeService employeeService;
     private GenerateId generateId;
+    private PasswordEncoder passwordEncoder;
 
     public List<User> getAll() {
         return userRepository.findAll();
@@ -38,27 +40,95 @@ public class UserService {
                         "Data User not found!!!"));
     }
 
-    public User create(UserRequest userRequest) {
+    // USER
+    public void createUser(UserRequest userRequest) {
         Employee employee = modelMapper.map(userRequest, Employee.class);
         User user = modelMapper.map(userRequest, User.class);
-
+    
+        // set password
+        user.setPassword(passwordEncoder.encode(userRequest.getPassword()));
+    
         // set Role
         List<Role> roles = new ArrayList<>();
         roles.add(roleService.getById(1));
         user.setRoles(roles);
-
-        // Employee emp = employeeService.getById(employee.getId());
-        // String nik = emp.getNik();
-
-
+    
         employee.setUser(user);
-        // employee.setNik(employee.getNik());
-        Employee emp = employeeService.create(employee);
-        user.setEmployee(emp);
-        // user.setUsername(nik);
-        // user.setPassword(nik);
-        return userRepository.save(user);
-    }
+        user.setEmployee(employee);
+        userRepository.save(user);
+      }
+
+        // Admin
+      public void createAdmin(UserRequest userRequest) {
+        Employee employee = modelMapper.map(userRequest, Employee.class);
+        User user = modelMapper.map(userRequest, User.class);
+    
+        // set password
+        user.setPassword(passwordEncoder.encode(userRequest.getPassword()));
+    
+        // set Role
+        List<Role> roles = new ArrayList<>();
+        roles.add(roleService.getById(2));
+        user.setRoles(roles);
+    
+        employee.setUser(user);
+        user.setEmployee(employee);
+        userRepository.save(user);
+      }
+    
+      //MANAGER
+      public void createManager(UserRequest userRequest) {
+        Employee employee = modelMapper.map(userRequest, Employee.class);
+        User user = modelMapper.map(userRequest, User.class);
+    
+        // set password
+        user.setPassword(passwordEncoder.encode(userRequest.getPassword()));
+    
+        // set Role
+        List<Role> roles = new ArrayList<>();
+        roles.add(roleService.getById(3));
+        user.setRoles(roles);
+    
+        employee.setUser(user);
+        user.setEmployee(employee);
+        userRepository.save(user);
+      }
+    
+      // iT SUPPORT
+      public void createITsupport(UserRequest userRequest) {
+        Employee employee = modelMapper.map(userRequest, Employee.class);
+        User user = modelMapper.map(userRequest, User.class);
+    
+        // set password
+        user.setPassword(passwordEncoder.encode(userRequest.getPassword()));
+    
+        // set Role
+        List<Role> roles = new ArrayList<>();
+        roles.add(roleService.getById(4));
+        user.setRoles(roles);
+    
+        employee.setUser(user);
+        user.setEmployee(employee);
+        userRepository.save(user);
+      }
+
+        // Finance
+        public void createFinance(UserRequest userRequest) {
+            Employee employee = modelMapper.map(userRequest, Employee.class);
+            User user = modelMapper.map(userRequest, User.class);
+        
+            // set password
+            user.setPassword(passwordEncoder.encode(userRequest.getPassword()));
+        
+            // set Role
+            List<Role> roles = new ArrayList<>();
+            roles.add(roleService.getById(5));
+            user.setRoles(roles);
+        
+            employee.setUser(user);
+            user.setEmployee(employee);
+            userRepository.save(user);
+        }
 
     public User update(Integer id, User user) {
         getById(id); // method getById

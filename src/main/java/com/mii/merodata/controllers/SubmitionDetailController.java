@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.mii.merodata.models.SubmitionDetail;
 import com.mii.merodata.models.dto.request.SubmitionRequest;
+import com.mii.merodata.services.EmailService;
 import com.mii.merodata.services.SubmitionDetailService;
 
 import lombok.AllArgsConstructor;
@@ -22,6 +23,7 @@ import lombok.AllArgsConstructor;
 @RequestMapping("/detsub")
 public class SubmitionDetailController {
     private SubmitionDetailService submitionDetailService;
+    private EmailService emailService;
 
     @GetMapping
     public List<SubmitionDetail> getAll() {
@@ -46,5 +48,10 @@ public class SubmitionDetailController {
     @DeleteMapping("/{id}")
     public SubmitionDetail delete(@PathVariable Integer id) {
         return submitionDetailService.delete(id);
+    }
+
+    @PostMapping("/SubEmail")
+    public void createFinance(@RequestBody SubmitionDetail submitionDetail){
+        emailService.sendEmailSubmition(submitionDetail);
     }
 }

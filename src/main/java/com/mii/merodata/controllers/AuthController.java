@@ -20,23 +20,10 @@ public class AuthController {
   private AuthService authService;
   private EmailService emailService;
 
-  // @PostMapping("/login")
-  // public LoginResponse login(@RequestBody LoginRequest loginRequest) {
-  //   return authService.login(loginRequest);
-  // }
-
-  @PostMapping("/register-user")
-  public void createUser(@RequestBody UserRequest userRequest){
-    authService.createUser(userRequest);
+  @PostMapping("/login")
+  public LoginResponse login(@RequestBody LoginRequest loginRequest) {
+    return authService.login(loginRequest);
   }
 
-  @PostMapping("/register-manager")
-  public void createManager(@RequestBody UserRequest userRequest){
-    authService.createManager(userRequest);
-  }
-
-  @PostMapping("/register-itsupport")
-  public void createITsupport(@RequestBody UserRequest userRequest){
-    authService.createITsupport(userRequest);
-  }
+  
 }
