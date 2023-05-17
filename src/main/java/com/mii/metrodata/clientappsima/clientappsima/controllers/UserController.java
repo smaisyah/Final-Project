@@ -58,8 +58,8 @@ public class UserController {
     }
 
     @DeleteMapping("/{id}")
-	public String delete(@PathVariable int id) {
-		employeeService.delete(id);
+	public String delete(@PathVariable String nik) {
+		employeeService.delete(nik);
 		return "redirect:/user";
 	}
 }

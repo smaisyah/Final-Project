@@ -1,5 +1,7 @@
 package com.mii.metrodata.clientappsima.clientappsima.controllers;
 
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -20,10 +22,17 @@ import lombok.AllArgsConstructor;
 public class ProductController {
     private ProductService productService;
 
-    @GetMapping("/create")
-    public String createView(Product product){
-        return "product/create-form";
+    @GetMapping
+    public String index(Model model){
+        List<Product> products = productService.getAll();
+        model.addAttribute("products", products);
+        return "view/product";
     }
+
+    // @GetMapping("/create")
+    // public String createView(Product product){
+    //     return "product/create-form";
+    // }
 
     @PostMapping
     public String create(Product product){
@@ -31,11 +40,11 @@ public class ProductController {
         return "redirect:/product";
     }
 
-    @GetMapping("/update/{id}")
-    public String updateView(@PathVariable int id,Model model){
-        model.addAttribute("product", productService.getById(id));
-        return "product/update-form";
-    }
+    // @GetMapping("/update/{id}")
+    // public String updateView(@PathVariable int id,Model model){
+    //     model.addAttribute("product", productService.getById(id));
+    //     return "product/update-form";
+    // }
 
     @PutMapping("/{id}")
     public String update(@PathVariable int id, Product product){

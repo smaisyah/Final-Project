@@ -1,18 +1,15 @@
 $(document).ready(function () {
     $('#employee-table').DataTable({
         ajax: {
-            url: '/api/employee',
+            url: 'api/employee',
             dataSrc: ''
         },
-        columns: [{
-            data: null,
+        columns: [
+            {data: null,
             render: function (data, type, row, meta) {
                 return meta.row + meta.settings._iDisplayStart + 1;
             }
             },
-            // {
-            //     data: 'id'
-            // },
             {
                 data: 'nik'
             },
@@ -51,15 +48,15 @@ $(document).ready(function () {
                 render: function (data, row, type, meta) {
                     return `
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#detailModal"
-                        onclick="countryDetail(${data.id})">
+                        onclick="countryDetail(${data.nik})">
                         <i class="bi bi-exclamation-circle-fill"></i>
                     </button>
                     <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#updateModal"
-                        onclick="beforeUpdate(${data.id})">
+                        onclick="beforeUpdate(${data.nik})">
                         <i class="bi bi-pencil-square"></i>
                     </button>
                     <button type="button" class="btn btn-danger"
-                        onclick="countryDelete(${data.id})">
+                        onclick="countryDelete(${data.nik})">
                         <i class="bi bi-trash3-fill"></i>
                     </button>
                     
@@ -89,7 +86,7 @@ $(document).ready(function () {
         success: function (result) {
             $.each(result, function (key, value) {
                 $('#manajer-input-name').append(
-                    '<option value="' + value.id + '">' + value.name + '</option>'
+                    '<option value="' + value.nik + '">' + value.name + '</option>'
                 )
                 })
             }
@@ -166,25 +163,33 @@ function create() {
     })
 }
 
-function beforeUpdate(id) {
+function beforeUpdate(nik) {
     $.ajax({
         method: "GET",
-        url: "api/employee/" + id,
+        url: "api/employee/" + nik,
         dataType: "JSON",
         success: function (result) {
-            $('#employee-update-id').val(`${result.id}`)
-            $('#employee-update-name').val(`${result.name}`)
-            $('#employee-update-code').val(`${result.code}`)
-            $('#employee-update-employee option[value="' + result.employee.id + '"]').attr('selected', 'selected');
+            $('#employee-update-nik').text(`${result.nik}`)
+            $('#employee-update-name').text(`${result.name}`)
+            $('#gender-update-name').text(`${result.gender.name}`)
+            $('#employee-update-phone').text(`${result.phone}`)
+            $('#employee-update-email').text(`${result.email}`)
+            $('#employee-update-address').text(`${result.address}`)
+            $('#department-update-name').text(`${result.department.name}`)
+            $('#manajer-update-name').text(`${result.manajer.name}`)
         }
     })
 }
 
 function update() {
-    let valId = $('#employee-update-id').val()
-    let valName = $('#employee-update-name').val()
-    let valCode = $('#employee-update-code').val()
-    let valReg = $('#employee-update-employee option:selected').val()
+    let valNik = $('#employee-update-nik').val();
+    let valName = $('#employee-update-name').val();
+    let valGender = $('#gender-update-name option:selected').val() === 'Perempuan' ? 'P' : 'L';
+    let valPhone = $('#employee-update-phone').val();
+    let valEmail = $('#employee-update-email').val();
+    let valAddress = $('#employee-update-address').val();
+    let valDep = $('#department-update-name option:selected').val();
+    let valMan = $('#manager-update-name option:selected').val();
 
     Swal.fire({
         title: 'Are you sure?',
@@ -198,14 +203,21 @@ function update() {
         if (result.isConfirmed) {
             $.ajax({
                 method: "PUT",
-                url: "api/employee/" + valId,
+                url: "api/employee/" + valNik,
                 dataType: "JSON",
                 contentType: "application/json",
                 data: JSON.stringify({
+                    nik: valNik,
                     name: valName,
-                    code: valCode,
-                    employee: {
-                        id: valReg
+                    gender: valGender,
+                    phone: valPhone,
+                    email: valEmail,
+                    address: valAddress,
+                    department: {
+                        name: valDep
+                    },
+                    manajer: {
+                        nik: valMan
                     }
                 }),
                 success: result => {
@@ -224,7 +236,7 @@ function update() {
     })
 }
 
-function countryDelete(id) {
+function countryDelete(nik) {
     Swal.fire({
         title: 'Are you sure?',
         text: "You won't be delete this employee!",
@@ -237,7 +249,7 @@ function countryDelete(id) {
         if (result.isConfirmed) {
             $.ajax({
                 method: "DELETE",
-                url: "api/employee/" + id,
+                url: "api/employee/" + nik,
                 dataType: "JSON",
                 success: result => {
                     $('#employee-table').DataTable().ajax.reload()
@@ -254,16 +266,20 @@ function countryDelete(id) {
     })
 }
 
-function countryDetail(id) {
+function countryDetail(nik) {
     $.ajax({
         method: "GET",
-        url: "api/employee/" + id,
+        url: "api/employee/" + nik,
         dataType: "JSON",
         success: function (result) {
-            $('#employee-detail-id').text(`${result.id}`)
+            $('#employee-detail-nik').text(`${result.nik}`)
             $('#employee-detail-name').text(`${result.name}`)
-            $('#employee-detail-code').text(`${result.code}`)
-            $('#employee-detail-employee').text(`${result.employee.name}`)
+            $('#gender-detail-name').text(`${result.gender.name}`)
+            $('#employee-detail-phone').text(`${result.phone}`)
+            $('#employee-detail-email').text(`${result.email}`)
+            $('#employee-detail-address').text(`${result.address}`)
+            $('#department-detail-name').text(`${result.department.name}`)
+            $('#manajer-detail-name').text(`${result.manajer.name}`)
         }
     })
 }

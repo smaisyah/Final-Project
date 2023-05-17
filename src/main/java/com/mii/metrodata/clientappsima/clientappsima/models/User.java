@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class User {
-    private long id;
+    private String id;
     private String username;
     private String password;
     private Boolean isEnabled = true;

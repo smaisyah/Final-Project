@@ -42,21 +42,21 @@ public class EmployeeController {
         return "redirect:/employee";
     }
 
-    @GetMapping("/update/{id}")
-    public String updateView(@PathVariable int id,Model model){
-        model.addAttribute("employee", employeeService.getById(id));
+    @GetMapping("/update/{nik}")
+    public String updateView(@PathVariable String nik,Model model){
+        model.addAttribute("employee", employeeService.getById(nik));
         return "employee/update-form";
     }
 
-    @PutMapping("/{id}")
-    public String update(@PathVariable int id, Employee employee){
-        employeeService.update(id, employee);
+    @PutMapping("/{nik}")
+    public String update(@PathVariable String nik, Employee employee){
+        employeeService.update(nik, employee);
         return "redirect:/employee";
     }
 
-    @DeleteMapping("/{id}")
-    public String delete(@PathVariable int id){
-        employeeService.delete(id);
+    @DeleteMapping("/{nik}")
+    public String delete(@PathVariable String nik){
+        employeeService.delete(nik);
         return "redirect:/employee";
     }
 }

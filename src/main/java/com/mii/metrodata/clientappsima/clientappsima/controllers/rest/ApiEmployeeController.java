@@ -27,9 +27,9 @@ public class ApiEmployeeController {
         return employeeService.getAll();
     }
 
-    @GetMapping("/{id}")
-    public Employee getById(@PathVariable int id){
-        return employeeService.getById(id);
+    @GetMapping("/{nik}")
+    public Employee getById(@PathVariable String nik){
+        return employeeService.getById(nik);
     }
 
     @PostMapping
@@ -37,13 +37,13 @@ public class ApiEmployeeController {
         return employeeService.create(employee);
     }
 
-    @PutMapping("/{id}")
-    public Employee update(@PathVariable int id, @RequestBody Employee employee){
-        return employeeService.update(id, employee);
+    @PutMapping("/{nik}")
+    public Employee update(@PathVariable String nik, @RequestBody Employee employee){
+        return employeeService.update(nik, employee);
     }
 
-    @DeleteMapping("/{id}")
-    public Employee delete(@PathVariable int id){
-        return employeeService.delete(id);
+    @DeleteMapping("/{nik}")
+    public Employee delete(@PathVariable String nik){
+        return employeeService.delete(nik);
     }
 }

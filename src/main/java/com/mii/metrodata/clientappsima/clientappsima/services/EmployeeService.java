@@ -34,9 +34,9 @@ public class EmployeeService {
             }).getBody();
     }
 
-    public Employee getById(int id){
+    public Employee getById(String nik){
         return restTemplate.exchange(
-            url + "/" + id,
+            url + "/" + nik,
             HttpMethod.GET,
             null,
             new ParameterizedTypeReference<Employee>() {  
@@ -52,9 +52,9 @@ public class EmployeeService {
             }).getBody();
     }
 
-    public Employee update(int id, Employee employee) {
+    public Employee update(String nik, Employee employee) {
         return restTemplate.exchange(
-            url + "/" + id,
+            url + "/" + nik,
                 HttpMethod.PUT,
                 new HttpEntity(employee),
                 new ParameterizedTypeReference<Employee>() {
@@ -62,9 +62,9 @@ public class EmployeeService {
         ).getBody();
     }
 
-    public Employee delete(int id){
+    public Employee delete(String nik){
         return restTemplate.exchange(
-            url + "/" + id,
+            url + "/" + nik,
             HttpMethod.DELETE,
               null,
              new ParameterizedTypeReference<Employee>() {
