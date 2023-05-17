@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" 
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css">
+
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.css" />
+</head>
+<body>
+    <section>
+        <div class="container p-4">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <h1 class="fw-bold">Create Employee</h1>
+              <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#createModal">
+                Add Employee
+              </button>
+            </div>
+            <table id="employee-table" class="table table-bordered table-striped">
+              <thead class="table-dark">
+                <tr>
+                  <th class="col-1">id</th>
+                  <th class="col-1">nik</th>
+                  <th class="col-1">name</th>
+                  <th class="col-1">gender</th>
+                  <th class="col-1">email</th>
+                  <th class="col-1">phone</th>
+                  <th class="col-1">address</th>
+                  <th class="col-1">department name</th>
+                  <th class="col-1">manager name</th>
+                  <th class="col-3">action</th>
+                </tr>
+              </thead>
+              <tbody>
+              </tbody>
+            </table>
+        </div>
+      
+        <!-- Modal Create -->
+        <div class="modal fade" id="createModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+          role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Form Employee</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <div class="form-group">
+                  <label>Nik</label>
+                  <input type="text" class="form-control" placeholder="Enter Employee Nik" id="employee-input-nik">
+                </div>
+              </div>
+              <div class="modal-body">
+                <div class="form-group">
+                  <label>Name</label>
+                  <input type="text" class="form-control" placeholder="Enter Employee Name" id="employee-input-name">
+                </div>
+              </div>
+              <div class="modal-body">
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-6">
+                      <label>Select Gender</label>
+                      <select class="form-control" id="gender-input-name">
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-body">
+                <div class="form-group">
+                  <label>Email</label>
+                  <input type="text" class="form-control" placeholder="Enter Employee Email" id="employee-input-email">
+                </div>
+              </div>
+              <div class="modal-body">
+                <div class="form-group">
+                  <label>Phone Number</label>
+                  <input type="text" class="form-control" placeholder="Enter Employee Phone Number" id="employee-input-phone">
+                </div>
+              </div>
+              <div class="modal-body">
+                <div class="form-group">
+                  <label>Address</label>
+                  <input type="text" class="form-control" placeholder="Enter Employee address" id="employee-input-address">
+                </div>
+              </div>
+              <div class="modal-body">
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-6">
+                      <label>Select Department</label>
+                      <select class="form-control" id="department-input-name">
+                      </select>
+                    </div>
+                    <div class="col-6">
+                      <label>Select Manager</label>
+                      <select class="form-control" id="manajer-input-name">
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary" onclick="create()">Submit</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      
+        <!-- Modal Update -->
+        <div class="modal fade" id="updateModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+          role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+          <div class="modal-dialog " role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Update Employee</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <input type="hidden" id="employee-update-id">
+                <div class="form-group">
+                  <label>Nik</label>
+                  <input type="text" class="form-control" id="employee-update-nik">
+                </div>
+              </div>
+              <div class="modal-body">
+                <input type="hidden" id="employee-update-id">
+                <div class="form-group">
+                  <label>Name</label>
+                  <input type="text" class="form-control" id="employee-update-name">
+                </div>
+              </div>
+              <div class="modal-body">
+                <input type="hidden" id="employee-update-id">
+                <div class="form-group">
+                  <label>Gender</label>
+                  <input type="text" class="form-control" id="employee-update-name">
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary" onclick="update()">Submit</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      
+        <!-- Modal Detail -->
+        <div class="modal fade" id="detailModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+          aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Detail Employee</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <table class="table table-borderless">
+                  <tbody>
+                    <tr>
+                      <td>ID </td>
+                      <td id="employee-detail-id"></td>
+                    </tr>
+                    <tr>
+                      <td>Name </td>
+                      <td id="employee-detail-name"></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              </div>
+      
+            </div>
+          </div>
+        </div>
+    </section>
+
+    <!-- JQuery Script -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+    </script>
+
+    <!-- DataTables Script -->
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
+
+    <!-- SweetAlert2 Script -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!-- <script th:src="@{/js/addCSRF.js}"></script> -->
+    <script th:src="@{/js/employee.js}"></script>
+</body>
+</html>
