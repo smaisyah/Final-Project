@@ -20,9 +20,6 @@ $(document).ready(function () {
                 data: 'budget'
             },
             {
-                data: 'manager.name'
-            },
-            {
                 "data": null,
                 render: function (data, row, type, meta) {
                     return `
@@ -42,18 +39,6 @@ $(document).ready(function () {
                 }
             }
         ]
-    });
-    $.ajax({
-        method: "GET",
-        url: "api/department",
-        dataType: "JSON",
-        success: function (result) {
-            $.each(result, function (key, value) {
-                $('#department-input-name').append(
-                    '<option value="' + value.id + '">' + value.name + '</option>'
-                )
-            })
-        }
     });
 
     $.ajax({
@@ -75,18 +60,18 @@ $(document).ready({
 })
 
 function create() {
+    let valId = $('#department-input-id').val();
     let valName = $('#department-input-name').val();
     let valBudget = $('#department-input-budget').val();
-    let valManager = $('#department-update-manager').val()
 
     $.ajax({
         method: "POST",
         url: "api/department",
         dataType: "JSON",
         data: JSON.stringify({
+            id: valId,
             name: valName,
-            budget: valBudget,
-            manager: valManager
+            budget: valBudget
         }),
         contentType: "application/json",
         success: result => {
@@ -96,7 +81,7 @@ function create() {
             Swal.fire({
                 position: 'top-center',
                 icon: 'success',
-                title: 'Country has been saved',
+                title: 'Department has been saved',
                 showConfirmButton: false,
                 timer: 1500
             })
@@ -113,7 +98,6 @@ function beforeUpdate(id) {
             $('#department-update-id').val(`${result.id}`)
             $('#department-update-name').val(`${result.name}`)
             $('#department-update-budget').val(`${result.budget}`)
-            $('#department-update-manager').val(`${result.manager}`)
         }
     })
 }
@@ -122,7 +106,6 @@ function update() {
     let valId = $('#department-update-id').val()
     let valName = $('#department-update-name').val()
     let valBudget = $('#department-update-budget').val()
-    let valManager = $('#department-update-manager').val()
 
     Swal.fire({
         title: 'Are you sure?',
@@ -141,8 +124,7 @@ function update() {
                 contentType: "application/json",
                 data: JSON.stringify({
                     name: valName,
-                    budget: valBudget,
-                    manager: valManager
+                    budget: valBudget
                 }),
                 success: result => {
                     $('#updateModal').modal('hide')
@@ -199,7 +181,6 @@ function departmentDetail(id) {
             $('#department-detail-id').text(`${result.id}`)
             $('#department-detail-name').text(`${result.name}`)
             $('#department-detail-budget').text(`${result.budget}`)
-            $('#department-detail-manager').text(`${result.manager}`)
         }
     })
 }

@@ -31,10 +31,10 @@ public class EmployeeController {
 		return "view/employee";
 	}
 
-    @GetMapping("/create")
-    public String createView(Employee employee){
-        return "employee/create-form";
-    }
+    // @GetMapping("/create")
+    // public String createView(Employee employee){
+    //     return "employee/create-form";
+    // }
 
     @PostMapping
     public String create(Employee employee){
@@ -42,11 +42,11 @@ public class EmployeeController {
         return "redirect:/employee";
     }
 
-    @GetMapping("/update/{nik}")
-    public String updateView(@PathVariable String nik,Model model){
-        model.addAttribute("employee", employeeService.getById(nik));
-        return "employee/update-form";
-    }
+    // @GetMapping("/update/{nik}")
+    // public String updateView(@PathVariable String nik,Model model){
+    //     model.addAttribute("employee", employeeService.getById(nik));
+    //     return "employee/update-form";
+    // }
 
     @PutMapping("/{nik}")
     public String update(@PathVariable String nik, Employee employee){

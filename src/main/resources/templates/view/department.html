@@ -30,7 +30,6 @@
                   <th class="col-1">Id</th>
                   <th class="col-1">Name</th>
                   <th class="col-1">Budget</th>
-                  <th class="col-1">Manager Id</th>
                   <th class="col-1">Action</th>
                 </tr>
               </thead>
@@ -59,13 +58,7 @@
               <div class="modal-body">
                 <div class="form-group">
                   <label>Budget</label>
-                  <input type="text" class="form-control" placeholder="Enter Department Budget" id="department-input-name">
-                </div>
-              </div>
-              <div class="modal-body">
-                <div class="form-group">
-                  <label>Manager Id</label>
-                  <input type="text" class="form-control" placeholder="Enter Department Budget" id="department-input-manager">
+                  <input type="text" class="form-control" placeholder="Enter Department Budget" id="department-input-budget">
                 </div>
               </div>
               <div class="modal-footer">
@@ -101,13 +94,6 @@
                   <input type="text" class="form-control" id="department-update-budget">
                 </div>
               </div>
-              <div class="modal-body">
-                <input type="hidden" id="department-update-id">
-                <div class="form-group">
-                  <label>Manager Id</label>
-                  <input type="text" class="form-control" id="department-update-manager">
-                </div>
-              </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 <button type="submit" class="btn btn-primary" onclick="update()">Submit</button>
@@ -141,10 +127,6 @@
                     <tr>
                       <td>Budget </td>
                       <td id="department-detail-budget"></td>
-                    </tr>
-                    <tr>
-                      <td>Manager </td>
-                      <td id="department-detail-manager"></td>
                     </tr>
                   </tbody>
                 </table>

@@ -57,12 +57,6 @@
               </div>
               <div class="modal-body">
                 <div class="form-group">
-                  <label>Nik</label>
-                  <input type="text" class="form-control" placeholder="Enter Employee Nik" id="employee-input-nik">
-                </div>
-              </div>
-              <div class="modal-body">
-                <div class="form-group">
                   <label>Name</label>
                   <input type="text" class="form-control" placeholder="Enter Employee Name" id="employee-input-name">
                 </div>
@@ -73,11 +67,13 @@
                     <div class="col-6">
                       <label>Select Gender</label>
                       <select class="form-control" id="gender-input-name">
+                        <option value="L" {{ kondisi ? 'selected' : '' }}>Laki-laki</option>
+                        <option value="P" {{ kondisi ? '' : 'selected' }}>Perempuan</option>
                       </select>
                     </div>
                   </div>
                 </div>
-              </div>
+              </div>              
               <div class="modal-body">
                 <div class="form-group">
                   <label>Email</label>
@@ -132,44 +128,46 @@
                 </button>
               </div>
               <div class="modal-body">
-                <input type="hidden" id="employee-update-id">
+                <input type="hidden" id="employee-update-nik">
                 <div class="form-group">
                   <label>Nik</label>
                   <input type="text" class="form-control" id="employee-update-nik">
                 </div>
               </div>
               <div class="modal-body">
-                <input type="hidden" id="employee-update-id">
+                <input type="hidden" id="employee-update-nik">
                 <div class="form-group">
                   <label>Name</label>
                   <input type="text" class="form-control" id="employee-update-name">
                 </div>
               </div>
               <div class="modal-body">
-                <input type="hidden" id="employee-update-id">
                 <div class="form-group">
                   <div class="row">
                     <div class="col-6">
                       <label>Select Gender</label>
-                      <select text class="form-control" id="gender-update-name">
+                      <select class="form-control" id="gender-update-name">
                       </select>
                     </div>
                   </div>
                 </div>
               </div>
               <div class="modal-body">
+                <input type="hidden" id="employee-update-nik">
                 <div class="form-group">
                   <label>Email</label>
                   <input type="text" class="form-control" placeholder="Enter Employee Email" id="employee-update-email">
                 </div>
               </div>
               <div class="modal-body">
+                <input type="hidden" id="employee-update-nik">
                 <div class="form-group">
                   <label>Phone Number</label>
                   <input type="text" class="form-control" placeholder="Enter Employee Phone Number" id="employee-update-phone">
                 </div>
               </div>
               <div class="modal-body">
+                <input type="hidden" id="employee-update-nik">
                 <div class="form-group">
                   <label>Address</label>
                   <input type="text" class="form-control" placeholder="Enter Employee address" id="employee-update-address">
@@ -214,12 +212,32 @@
                 <table class="table table-borderless">
                   <tbody>
                     <tr>
-                      <td>ID </td>
-                      <td id="employee-detail-id"></td>
+                      <td>Nik </td>
+                      <td id="employee-detail-nik"></td>
                     </tr>
                     <tr>
                       <td>Name </td>
                       <td id="employee-detail-name"></td>
+                    </tr>
+                    <tr>
+                      <td>Gender </td>
+                      <td id="gender-detail-name"></td>
+                    </tr>
+                    <tr>
+                      <td>Email </td>
+                      <td id="employee-detail-email"></td>
+                    </tr>
+                    <tr>
+                      <td>Phone </td>
+                      <td id="employee-detail-phone"></td>
+                    </tr>
+                    <tr>
+                      <td>Department </td>
+                      <td id="department-detail-name"></td>
+                    </tr>
+                    <tr>
+                      <td>Manajer </td>
+                      <td id="manajer-detail-name"></td>
                     </tr>
                   </tbody>
                 </table>

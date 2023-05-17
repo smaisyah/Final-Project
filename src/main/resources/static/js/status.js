@@ -86,7 +86,7 @@ function create() {
             Swal.fire({
                 position: 'top-center',
                 icon: 'success',
-                title: 'Country has been saved',
+                title: 'Status has been saved',
                 showConfirmButton: false,
                 timer: 1500
             })

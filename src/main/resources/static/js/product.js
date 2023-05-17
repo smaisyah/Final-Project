@@ -61,6 +61,19 @@ $(document).ready(function () {
 
     $.ajax({
         method: "GET",
+        url: "api/category",
+        dataType: "JSON",
+        success: function (result) {
+            $.each(result, function (key, value) {
+                $('#category-update-name').append(
+                    '<option value="' + value.id + '">' + value.name + '</option>'
+                )
+            })
+        }
+    });
+
+    $.ajax({
+        method: "GET",
         url: "api/user",
         dataType: "JSON",
         success: function (result) {
@@ -68,10 +81,25 @@ $(document).ready(function () {
                 $('#user-input-name').append(
                     '<option value="' + value.id + '">' + value.username + '</option>'
                 )
-                })
-            }
-        }) 
+            })
+        }
     });
+    
+    $.ajax({
+        method: "GET",
+        url: "api/user",
+        dataType: "JSON",
+        success: function (result) {
+            $.each(result, function (key, value) {
+                $('#user-update-name').append(
+                    '<option value="' + value.id + '">' + value.username + '</option>'
+                )
+            })
+        }
+    })
+});
+
+    
 
 $(document).ready({
     
@@ -123,12 +151,12 @@ function beforeUpdate(id) {
         url: "api/product/" + id,
         dataType: "JSON",
         success: function (result) {
-            $('#product-update-id').text(`${result.id}`)
-            $('#product-update-name').text(`${result.name}`)
-            $('#product-update-quantity').text(`${result.quantity}`)
-            $('#category-update-name').text(`${result.category.name}`)
-            $('#user-update-name').text(`${result.user.username}`)
-            $('#product-update-description').text(`${result.description}`)
+            $('#product-update-id').val(`${result.id}`)
+            $('#product-update-name').val(`${result.name}`)
+            $('#product-update-quantity').val(`${result.quantity}`)
+            $('#category-update-name option[value="' + result.category.name + '"]').attr('selected', 'selected')
+            $('#user-update-name option[value="' + result.user.username + '"]').attr('selected', 'selected')
+            $('#product-update-description').val(`${result.description}`);
         }
     })
 }

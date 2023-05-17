@@ -108,7 +108,7 @@ $(document).ready(function () {
                     genderText = 'Laki-laki';
                 }
                 
-                $('#gender-input-name').append(
+                $('#gender-update-name').append(
                     $('<option></option>').val(genderLabel).text(genderText)
                 );
             });
@@ -120,9 +120,8 @@ $(document).ready({
 })
 
 function create() {
-    let valNik = $('#employee-input-nik').val();
     let valName = $('#employee-input-name').val();
-    let valGender = $('#gender-input-name option:selected').val() === 'Perempuan' ? 'P' : 'L';
+    let valGender = $('#gender-input-name').val();
     let valPhone = $('#employee-input-phone').val();
     let valEmail = $('#employee-input-email').val();
     let valAddress = $('#employee-input-address').val();
@@ -134,7 +133,6 @@ function create() {
         url: "api/employee",
         dataType: "JSON",
         data: JSON.stringify({
-            nik: valNik,
             name: valName,
             gender: valGender,
             phone: valPhone,
@@ -169,14 +167,14 @@ function beforeUpdate(nik) {
         url: "api/employee/" + nik,
         dataType: "JSON",
         success: function (result) {
-            $('#employee-update-nik').text(`${result.nik}`)
-            $('#employee-update-name').text(`${result.name}`)
-            $('#gender-update-name').text(`${result.gender.name}`)
-            $('#employee-update-phone').text(`${result.phone}`)
-            $('#employee-update-email').text(`${result.email}`)
-            $('#employee-update-address').text(`${result.address}`)
-            $('#department-update-name').text(`${result.department.name}`)
-            $('#manajer-update-name').text(`${result.manajer.name}`)
+            $('#employee-update-nik').val(`${result.nik}`)
+            $('#employee-update-name').val(`${result.name}`)
+            $('#gender-update-name').val(`${result.gender.name}`)
+            $('#employee-update-phone').val(`${result.phone}`)
+            $('#employee-update-email').val(`${result.email}`)
+            $('#employee-update-address').val(`${result.address}`)
+            $('#department-update-name option[value="' + result.department.name + '"]').attr('selected', 'selected')
+            $('#manajer-update-name option[value="' + result.manajer.name + '"]').attr('selected', 'selected')
         }
     })
 }
