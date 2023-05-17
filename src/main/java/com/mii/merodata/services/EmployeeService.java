@@ -20,24 +20,22 @@ public class EmployeeService {
         return employeeRepository.findAll();
     }
 
-    public Employee getById(Integer id) {
-        return employeeRepository
-                .findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Employee not found"));
+    public Employee getById(String nik) {
+        return employeeRepository.findByNik(nik);
     }
 
     public Employee create(Employee employee) {
         return employeeRepository.save(employee);
     }
 
-    public Employee update(Integer id, Employee employee) {
-        getById(id); // method getById
-        employee.setId(id);
+    public Employee update(String nik, Employee employee) {
+        getById(nik); // method getById
+        employee.setNik(nik);
         return employeeRepository.save(employee);
     }
 
-    public Employee delete(Integer id) {
-        Employee employee = getById(id);
+    public Employee delete(String nik) {
+        Employee employee = getById(nik);
         employeeRepository.delete(employee);
         return employee;
     }

@@ -1,14 +1,16 @@
 package com.mii.merodata.models.dto.request;
 
-import java.sql.Date;
+import com.mii.merodata.models.Category;
+import com.mii.merodata.models.Submition;
 
+import lombok.Data;
+
+@Data
 public class SubmitionRequest {
-    private String productName;
+    private Category category;
+    private String name;
     private Integer quantity;
-    private String descriptionProduct;
-    private Date submitionDate;
-    private Double price;
-    private Integer quantitiBuy;
     private String description;
-    private String status;
+    private Double price;
+    private Submition submition;
 }

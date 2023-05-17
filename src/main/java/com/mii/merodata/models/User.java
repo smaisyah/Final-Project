@@ -27,11 +27,11 @@ import lombok.NoArgsConstructor;
 @Table(name = "user")
 public class User {
     @Id
-    private Integer id;
+    private String id;
 
     @Column(nullable = false, unique = true)
     private String username;
-    
+
     @Column(nullable = false)
     private String password;
 
@@ -41,7 +41,7 @@ public class User {
     @OneToOne
     @MapsId
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "nik")
     private Employee employee;
 
     @OneToMany(mappedBy = "user")

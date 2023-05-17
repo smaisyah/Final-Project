@@ -3,9 +3,9 @@ package com.mii.merodata.repositories;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.mii.merodata.models.Employee;
+import com.mii.merodata.models.History;
 
 @Repository
-public interface EmployeeRepository extends JpaRepository<Employee, Integer>{
-    Employee findByNik(String nik);
+public interface HistoryRepository extends JpaRepository<History, Integer> {
+
 }

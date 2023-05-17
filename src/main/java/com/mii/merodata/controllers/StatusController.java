@@ -11,44 +11,39 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.mii.merodata.models.Submition;
+import com.mii.merodata.models.Status;
 import com.mii.merodata.services.StatusService;
-import com.mii.merodata.services.SubmitionService;
 
 import lombok.AllArgsConstructor;
 
-@RestController
 @AllArgsConstructor
-@RequestMapping("submition")
-public class SubmitionController {
-    private SubmitionService submitionService;
+@RestController
+@RequestMapping("/status")
+public class StatusController {
     private StatusService statusService;
 
     @GetMapping
-    public List<Submition> getAll() {
-        return submitionService.getAll();
+    public List<Status> getAll() {
+        return statusService.getAll();
     }
 
     @GetMapping("/{id}")
-    public Submition getById(@PathVariable Integer id) {
-        return submitionService.getById(id);
+    public Status getById(@PathVariable Integer id) {
+        return statusService.getById(id);
     }
 
     @PostMapping
-    public Submition create(@RequestBody Submition submition) {
-        submition.setStatus(statusService.getById(1));
-        return submitionService.create(submition);
+    public Status create(@RequestBody Status status) {
+        return statusService.create(status);
     }
 
     @PutMapping("/{id}")
-    public Submition update(
-        @PathVariable Integer id,
-        @RequestBody Submition Submition) {
-        return submitionService.update(id, Submition);
+    public Status update(@PathVariable Integer id, @RequestBody Status status) {
+        return statusService.update(id, status);
     }
 
     @DeleteMapping("/{id}")
-    public Submition delete(@PathVariable Integer id) {
-        return submitionService.delete(id);
+    public Status delete(@PathVariable Integer id) {
+        return statusService.delete(id);
     }
 }

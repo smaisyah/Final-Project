@@ -11,41 +11,39 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.mii.merodata.models.Employee;
-import com.mii.merodata.services.EmployeeService;
+import com.mii.merodata.models.History;
+import com.mii.merodata.services.HistoryService;
 
 import lombok.AllArgsConstructor;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("/employee")
-public class EmployeeController {
-    private EmployeeService employeeService;
+@RequestMapping("/history")
+public class HistoryController {
+    private HistoryService historyService;    
 
     @GetMapping
-    public List<Employee> getAll() {
-        return employeeService.getAll();
+    public List<History> getAll() {
+        return historyService.getAll();
     }
 
     @GetMapping("/{id}")
-    public Employee getByid(@PathVariable String nik) {
-        return employeeService.getById(nik);
+    public History getById(@PathVariable Integer id) {
+        return historyService.getById(id);
     }
 
     @PostMapping
-    public Employee create(@RequestBody Employee employee) {
-        return employeeService.create(employee);
+    public History create(@RequestBody History history) {
+        return historyService.create(history);
     }
 
     @PutMapping("/{id}")
-    public Employee update(
-            @PathVariable String id,
-            @RequestBody Employee employee) {
-        return employeeService.update(id, employee);
+    public History update(@PathVariable Integer id, @RequestBody History history) {
+        return historyService.update(id, history);
     }
 
     @DeleteMapping("/{id}")
-    public Employee delete(@PathVariable String id) {
-        return employeeService.delete(id);
+    public History delete(@PathVariable Integer id) {
+        return historyService.delete(id);
     }
 }
