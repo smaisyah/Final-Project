@@ -5,11 +5,6 @@ $(document).ready(function () {
             dataSrc: ''
         },
         columns: [
-            {data: null,
-            render: function (data, type, row, meta) {
-                return meta.row + meta.settings._iDisplayStart + 1;
-            }
-            },
             {
                 data: 'nik'
             },
@@ -139,7 +134,7 @@ function create() {
             email: valEmail,
             address: valAddress,
             department: {
-                name: valDep
+                id: valDep
             },
             manajer: {
                 nik: valMan
@@ -212,7 +207,7 @@ function update() {
                     email: valEmail,
                     address: valAddress,
                     department: {
-                        name: valDep
+                        id: valDep
                     },
                     manajer: {
                         nik: valMan
